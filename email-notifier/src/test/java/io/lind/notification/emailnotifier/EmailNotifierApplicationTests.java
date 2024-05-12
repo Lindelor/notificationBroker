@@ -1,10 +1,10 @@
-package io.lind.notification.eurekaserver;
+package io.lind.notification.emailnotifier;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EurekaServerApplicationTests {
+class EmailNotifierApplicationTests {
 
     @Test
     void contextLoads() {
