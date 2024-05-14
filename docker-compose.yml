@@ -1,0 +1,58 @@
+services:
+  eureka-server:
+    build: ./eureka-server
+    restart: always
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://eureka-server:8761" ]
+
+  api-gateway:
+    build: ./api-gateway
+    restart: always
+    environment:
+      REGISTRY_HOST: eureka-server
+    ports:
+      - "8765:8765"
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      email-notifier:
+        condition: service_started
+      push-notifier:
+        condition: service_started
+      sms-notifier:
+        condition: service_started
+
+  sms-notifier:
+    build: ./sms-notifier
+    restart: always
+    environment:
+      REGISTRY_HOST: eureka-server
+    ports:
+      - "8768:8768"
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+
+  email-notifier:
+    build: ./email-notifier
+    restart: always
+    environment:
+      REGISTRY_HOST: eureka-server
+    ports:
+      - "8766:8766"
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+
+  push-notifier:
+    build: ./push-notifier
+    restart: always
+    environment:
+      REGISTRY_HOST: eureka-server
+    ports:
+      - "8767:8767"
+    depends_on:
+      eureka-server:
+        condition: service_healthy
