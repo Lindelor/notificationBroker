@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api")
 public class NotificationController {
 
-    @Autowired
     private EmailService emailService;
+
+    @Autowired
+    public NotificationController(EmailService emailService) {
+        this.emailService = emailService;
+    }
 
 
     @PostMapping(path = "/v1/send")

@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api")
 public class NotificationController {
 
-    @Autowired
     private PushService pushService;
+
+    @Autowired
+    public NotificationController(PushService pushService) {
+        this.pushService = pushService;
+    }
 
     @PostMapping(path = "/v1/send")
     @ResponseStatus(HttpStatus.OK)

@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api")
 public class NotificationController {
 
-    @Autowired
     private SMSService smsService;
+
+    @Autowired
+    public NotificationController(SMSService smsService) {
+        this.smsService = smsService;
+    }
 
     @PostMapping(path = "/v1/send")
     @ResponseStatus(HttpStatus.OK)
