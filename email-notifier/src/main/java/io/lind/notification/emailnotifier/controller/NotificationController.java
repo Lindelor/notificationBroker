@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api")
 public class NotificationController {
 
-    private EmailService emailService;
+    private final EmailService emailService;
 
     @Autowired
     public NotificationController(EmailService emailService) {
